@@ -48,7 +48,7 @@ public class Equipment extends BaseEntity {
         return controls;
     }
 
-    public void addControls(Control control) {
+    public void addControl(Control control) {
         control.setEquipment(this);
         controls.add(control);
     }

@@ -3,8 +3,10 @@ package com.floriantoenjes.home.automation.control;
 import com.floriantoenjes.home.automation.core.BaseEntity;
 import com.floriantoenjes.home.automation.equipment.Equipment;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Control extends BaseEntity{
     private String controlName;
     private Double value;
