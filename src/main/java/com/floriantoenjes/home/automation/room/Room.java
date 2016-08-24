@@ -22,6 +22,7 @@ public class Room extends BaseEntity{
     }
 
     public Room(String roomName, Integer squareFootage) {
+        this();
         this.roomName = roomName;
         this.squareFootage = squareFootage;
     }

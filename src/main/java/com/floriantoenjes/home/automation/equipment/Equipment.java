@@ -25,6 +25,7 @@ public class Equipment extends BaseEntity {
     }
 
     public Equipment(String equipmentName) {
+        this();
         this.equipmentName = equipmentName;
     }
 

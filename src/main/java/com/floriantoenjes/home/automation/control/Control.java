@@ -2,24 +2,31 @@ package com.floriantoenjes.home.automation.control;
 
 import com.floriantoenjes.home.automation.core.BaseEntity;
 import com.floriantoenjes.home.automation.equipment.Equipment;
+import com.floriantoenjes.home.automation.value.Value;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Control extends BaseEntity{
     private String controlName;
-    private Double value;
+    @OneToMany(mappedBy = "control", cascade = CascadeType.ALL)
+    private List<Value> values;
     @ManyToOne
     private Equipment equipment;
 
     protected Control() {
         super();
+        this.values = new ArrayList<>();
     }
 
-    public Control(String controlName, Double value) {
+    public Control(String controlName) {
+        this();
         this.controlName = controlName;
-        this.value = value;
     }
 
     public String getControlName() {
@@ -30,12 +37,13 @@ public class Control extends BaseEntity{
         this.controlName = controlName;
     }
 
-    public Double getValue() {
-        return value;
+    public List<Value> getValues() {
+        return values;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public void addValue(Value value) {
+        value.setControl(this);
+        values.add(value);
     }
 
     public Equipment getEquipment() {
