@@ -1,7 +1,7 @@
 package com.floriantoenjes.home.automation.room;
 
 import com.floriantoenjes.home.automation.core.BaseEntity;
-import com.floriantoenjes.home.automation.equipment.Equipment;
+import com.floriantoenjes.home.automation.device.Device;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,11 +14,11 @@ public class Room extends BaseEntity{
     private String roomName;
     private Integer squareFootage;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Equipment> equipments;
+    private List<Device> devices;
 
     protected Room() {
         super();
-        equipments = new ArrayList<>();
+        devices = new ArrayList<>();
     }
 
     public Room(String roomName, Integer squareFootage) {
@@ -43,12 +43,12 @@ public class Room extends BaseEntity{
         this.squareFootage = squareFootage;
     }
 
-    public List<Equipment> getEquipments() {
-        return equipments;
+    public List<Device> getDevices() {
+        return devices;
     }
 
-    public void addEquipment(Equipment equipment) {
-        equipment.setRoom(this);
-        equipments.add(equipment);
+    public void addDevice(Device device) {
+        device.setRoom(this);
+        devices.add(device);
     }
 }

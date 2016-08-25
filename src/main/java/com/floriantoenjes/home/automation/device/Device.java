@@ -1,4 +1,4 @@
-package com.floriantoenjes.home.automation.equipment;
+package com.floriantoenjes.home.automation.device;
 
 import com.floriantoenjes.home.automation.control.Control;
 import com.floriantoenjes.home.automation.core.BaseEntity;
@@ -12,29 +12,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Equipment extends BaseEntity {
-    private String equipmentName;
+public class Device extends BaseEntity {
+    private String deviceName;
     @ManyToOne
     private Room room;
-    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
     private List<Control> controls;
 
-    protected Equipment() {
+    protected Device() {
         super();
         controls = new ArrayList<>();
     }
 
-    public Equipment(String equipmentName) {
+    public Device(String equipmentName) {
         this();
-        this.equipmentName = equipmentName;
+        this.deviceName = equipmentName;
     }
 
-    public String getEquipmentName() {
-        return equipmentName;
+    public String getDeviceName() {
+        return deviceName;
     }
 
-    public void setEquipmentName(String equipmentName) {
-        this.equipmentName = equipmentName;
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 
     public Room getRoom() {
@@ -50,7 +50,7 @@ public class Equipment extends BaseEntity {
     }
 
     public void addControl(Control control) {
-        control.setEquipment(this);
+        control.setDevice(this);
         controls.add(control);
     }
 }
