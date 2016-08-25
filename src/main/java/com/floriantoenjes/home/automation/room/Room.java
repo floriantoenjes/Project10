@@ -15,7 +15,7 @@ public class Room extends BaseEntity{
     private String roomName;
 
     @Range(min = 0, max = 1000, message = "Cannot be higher than 1000")
-    private Integer squareFootage;
+    private Integer area;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Device> devices;
 
@@ -24,10 +24,10 @@ public class Room extends BaseEntity{
         devices = new ArrayList<>();
     }
 
-    public Room(String roomName, Integer squareFootage) {
+    public Room(String roomName, Integer area) {
         this();
         this.roomName = roomName;
-        this.squareFootage = squareFootage;
+        this.area = area;
     }
 
     public String getRoomName() {
@@ -38,12 +38,12 @@ public class Room extends BaseEntity{
         this.roomName = roomName;
     }
 
-    public Integer getSquareFootage() {
-        return squareFootage;
+    public Integer getArea() {
+        return area;
     }
 
-    public void setSquareFootage(Integer squareFootage) {
-        this.squareFootage = squareFootage;
+    public void setArea(Integer area) {
+        this.area = area;
     }
 
     public List<Device> getDevices() {
