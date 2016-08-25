@@ -6,6 +6,8 @@ import com.floriantoenjes.home.automation.device.Device;
 import com.floriantoenjes.home.automation.device.EquipmentRepository;
 import com.floriantoenjes.home.automation.room.Room;
 import com.floriantoenjes.home.automation.room.RoomRepository;
+import com.floriantoenjes.home.automation.user.User;
+import com.floriantoenjes.home.automation.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -13,15 +15,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseLoader implements ApplicationRunner {
-    private final ControlRepository controls;
-    private final EquipmentRepository equipments;
     private final RoomRepository rooms;
+    private final UserRepository users;
 
     @Autowired
-    public DatabaseLoader(ControlRepository controls, EquipmentRepository equipments, RoomRepository rooms) {
-        this.controls = controls;
-        this.equipments = equipments;
+    public DatabaseLoader(RoomRepository rooms, UserRepository users) {
         this.rooms = rooms;
+        this.users = users;
     }
 
     @Override
@@ -39,5 +39,11 @@ public class DatabaseLoader implements ApplicationRunner {
         room.addDevice(thermostat);
 
         rooms.save(room);
+
+        User user = new User("Florian", "Tönjes", "ftoenjes", "password", new String[]{"ROLE_USER", "ROLE_ADMIN"});
+        User user2 = new User("Kein", "Admin", "noadmin", "password", new String[]{"ROLE_USER"});
+
+        users.save(user);
+        users.save(user2);
     }
 }

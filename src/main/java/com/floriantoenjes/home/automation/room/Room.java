@@ -2,6 +2,7 @@ package com.floriantoenjes.home.automation.room;
 
 import com.floriantoenjes.home.automation.core.BaseEntity;
 import com.floriantoenjes.home.automation.device.Device;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import java.util.List;
 @Entity
 public class Room extends BaseEntity{
     private String roomName;
+
+    @Range(min = 0, max = 1000, message = "Cannot be higher than 1000")
     private Integer squareFootage;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Device> devices;
