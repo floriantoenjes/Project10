@@ -40,8 +40,8 @@ public class DatabaseLoader implements ApplicationRunner {
 
         rooms.save(room);
 
-        User user = new User("Florian", "Tönjes", "ftoenjes", "password", new String[]{"ROLE_USER", "ROLE_ADMIN"});
-        User user2 = new User("Kein", "Admin", "noadmin", "password", new String[]{"ROLE_USER"});
+        User user = new User("ftoenjes", "password", new String[]{"ROLE_USER", "ROLE_ADMIN"});
+        User user2 = new User("noadmin", "password", new String[]{"ROLE_USER"});
 
         users.save(user);
         users.save(user2);
