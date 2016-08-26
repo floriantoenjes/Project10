@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 public class Device extends BaseEntity {
-    private String deviceName;
+    private String name;
     @ManyToOne
     private Room room;
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
@@ -24,17 +24,17 @@ public class Device extends BaseEntity {
         controls = new ArrayList<>();
     }
 
-    public Device(String equipmentName) {
+    public Device(String name) {
         this();
-        this.deviceName = equipmentName;
+        this.name = name;
     }
 
-    public String getDeviceName() {
-        return deviceName;
+    public String getName() {
+        return name;
     }
 
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Room getRoom() {

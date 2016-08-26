@@ -20,10 +20,11 @@ public class Control extends BaseEntity{
         super();
     }
 
-    public Control(String name, Integer value) {
+    public Control(String name, Integer value, User lastModifiedBy) {
         this();
         this.name = name;
         this.value = value;
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public String getName() {

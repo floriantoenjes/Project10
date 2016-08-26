@@ -1,9 +1,7 @@
 package com.floriantoenjes.home.automation.core;
 
 import com.floriantoenjes.home.automation.control.Control;
-import com.floriantoenjes.home.automation.control.ControlRepository;
 import com.floriantoenjes.home.automation.device.Device;
-import com.floriantoenjes.home.automation.device.EquipmentRepository;
 import com.floriantoenjes.home.automation.room.Room;
 import com.floriantoenjes.home.automation.room.RoomRepository;
 import com.floriantoenjes.home.automation.user.User;
@@ -26,13 +24,20 @@ public class DatabaseLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        User user = new User("ftoenjes", "password", new String[]{"ROLE_USER", "ROLE_ADMIN"});
+        User user2 = new User("noadmin", "password", new String[]{"ROLE_USER"});
+
+        users.save(user);
+        users.save(user2);
+
         Room room = new Room("Kitchen", 125);
+        room.addAdministrator(user);
 
         Device thermostat = new Device("Thermostat");
 
-        Control control = new Control("currentTemperature", 68);
+        Control control = new Control("currentTemperature", 68, user);
 
-        Control control2 = new Control("currentHumidity", 95);
+        Control control2 = new Control("currentHumidity", 95, user2);
 
         thermostat.addControl(control);
         thermostat.addControl(control2);
@@ -40,10 +45,5 @@ public class DatabaseLoader implements ApplicationRunner {
 
         rooms.save(room);
 
-        User user = new User("ftoenjes", "password", new String[]{"ROLE_USER", "ROLE_ADMIN"});
-        User user2 = new User("noadmin", "password", new String[]{"ROLE_USER"});
-
-        users.save(user);
-        users.save(user2);
     }
 }

@@ -1,5 +1,6 @@
 package com.floriantoenjes.home.automation.room;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.floriantoenjes.home.automation.core.BaseEntity;
 import com.floriantoenjes.home.automation.device.Device;
 import com.floriantoenjes.home.automation.user.User;
@@ -17,12 +18,14 @@ public class Room extends BaseEntity{
     private Integer area;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Device> devices;
+    @JsonIgnore
     @ManyToMany
     private List<User> administrators;
 
     protected Room() {
         super();
         devices = new ArrayList<>();
+        administrators = new ArrayList<>();
     }
 
     public Room(String name, Integer area) {
