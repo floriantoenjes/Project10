@@ -28,8 +28,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                // Todo: Make sure that all resources need to be authenticated and POST rooms needs ADMIN role
                     .anyRequest().authenticated()
-                    .antMatchers(HttpMethod.POST, "/rooms").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.POST, "/api/v1/rooms").hasRole("ADMIN")
                 .and()
                 .httpBasic()
                 .and()

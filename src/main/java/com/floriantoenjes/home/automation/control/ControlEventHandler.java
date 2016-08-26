@@ -3,6 +3,7 @@ package com.floriantoenjes.home.automation.control;
 import com.floriantoenjes.home.automation.user.User;
 import com.floriantoenjes.home.automation.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,10 +19,20 @@ public class ControlEventHandler {
         this.users = users;
     }
 
-    @HandleBeforeSave
-    public void addLastModifiedAsLoggenInUser(Control control) {
+    @HandleBeforeCreate
+    public void addAdminBasedOnLoggedInUser(Control control) {
+        User user = getUser();
+        control.setLastModifiedBy(user);
+    }
+
+    private User getUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = users.findByName(username);
+        return users.findByName(username);
+    }
+
+    @HandleBeforeSave
+    public void addLastModifiedAsLoggedInUser(Control control) {
+        User user = getUser();
         control.setLastModifiedBy(user);
     }
 
